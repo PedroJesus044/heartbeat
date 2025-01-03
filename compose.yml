@@ -28,6 +28,6 @@ services:
           - ./heartbeat.docker.yml:/usr/share/heartbeat/heartbeat.yml:ro
       cap_add:
           - NET_RAW
-      image: docker.elastic.co/beats/heartbeat:8.17.0
+      image: docker.elastic.co/beats/heartbeat:8.16.0
       command: --strict.perms=false -e -E
           output.elasticsearch.hosts=["elasticsearch:9200"]
