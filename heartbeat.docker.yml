@@ -11,6 +11,7 @@ heartbeat.monitors:
     - elasticsearch
     - kibana
     - 144.202.30.234
+    - 144.202.20.31
 
 processors:
 - add_cloud_metadata: ~
