@@ -11,6 +11,8 @@ services:
       test: ["CMD-SHELL", "curl --silent --fail localhost:9200/_cluster/health || exit 1"]
       interval: 5s
       timeout: 5s
+    networks:
+      - ekb
 
   kibana:
     container_name: kibana
@@ -20,14 +22,21 @@ services:
     depends_on:
       elasticsearch:
         condition: service_healthy
+    networks:
+      - ekb
 
   heartbeat:
-      container_name: heartbeat
-      user: heartbeat
-      volumes:
-          - ./heartbeat.docker.yml:/usr/share/heartbeat/heartbeat.yml:ro
-      cap_add:
-          - NET_RAW
-      image: elastic/heartbeat:8.16.2
-      command: --strict.perms=false -e -E
-          output.elasticsearch.hosts=["elasticsearch:9200"]
+    container_name: heartbeat
+    user: heartbeat
+    volumes:
+        - ./heartbeat.docker.yml:/usr/share/heartbeat/heartbeat.yml:ro
+    cap_add:
+        - NET_RAW
+    image: elastic/heartbeat:8.16.2
+    command: --strict.perms=false -e -E
+        output.elasticsearch.hosts=["elasticsearch:9200"]
+    networks:
+      - ekb
+
+networks:
+  ekb:
