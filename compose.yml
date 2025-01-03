@@ -1,8 +1,6 @@
 services:
-#Servicios EKL para los logs.
-#La ventaja es que despliegan y analizan fallas, salidas de los comandos, pesos de archivos, etc.
   elasticsearch:
-    image: elasticsearch:8.16.2
+    image: elasticsearch:8.16.0
     ports:
       - "9200:9200"
     environment:
@@ -14,7 +12,7 @@ services:
       timeout: 5s
 
   kibana:
-    image: kibana:8.16.2
+    image: kibana:8.16.0
     ports:
       - "5601:5601"
     depends_on:
